@@ -15,8 +15,8 @@ jobs:
       uses: actions/checkout@v3
     - name: Update HTML
       run: |
-        if [ "{{ github.actor}}" == "Terrafirm97" ]; then
-          sed -i '/<\body>/i <p>Updated by Team Leader on '"$(date)"'</p>' index.html
+        if [ "${{ github.actor}}" == "Terrafirm97" ]; then
+          sed -i '/<\/body>/i <p>Updated by Team Leader on '"$(date)"'</p>' index.html
         fi
     - name: Update README
       run: |
@@ -29,6 +29,6 @@ jobs:
         git commit -m "Workflow: Updated HTML and README for ${{ github.actor }}" || echo "No changes to commit"
         git remote set-url origin https://x-access-token:${{ secrets.GITHUB_TOKEN }}@github.com/${{ github.repository }}
         git push origin main
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         
